@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize(
-  "socialMedia", // db name
+  "farm_monitoring_and_automation_system", // db name
   "root", // username
   "Root@123", // password 
   {
