@@ -1,5 +1,5 @@
 import express from 'express';
-import { login, logout, register, getAllUsers } from '../controllers/users.controllers.js';
+import { login, logout, register, googleLogin } from '../controllers/users.controllers.js';
 
 
 const route = express.Router();
@@ -7,7 +7,6 @@ const route = express.Router();
 route.post('/login', login);
 route.post('/logout', logout);
 route.post('/register', register);
-// test
-route.get('/users', getAllUsers);
+route.post("/google-login", googleLogin);
 
 export default route;

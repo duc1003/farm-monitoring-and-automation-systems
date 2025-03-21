@@ -28,6 +28,10 @@ const User = sequelize.define('User', {
         type: DataTypes.ENUM('user', 'admin'),
         defaultValue: 'user',
     },
+    avatar: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
