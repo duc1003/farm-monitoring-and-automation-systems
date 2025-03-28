@@ -1,0 +1,63 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+    height: 100vh;
+    background-color: white;
+    border-right: 1px solid #e0e0e0;
+    padding: 24px 0;
+    align-items: center;
+  }
+  
+  .menuTop {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: auto;
+  }
+  
+  .menuBottom {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .menuItem {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      .icon {
+        color: #3b82f6;
+      }
+    }
+  }
+  
+  .icon {
+    width: 32px;
+    height: 32px;
+    color: #6b7280;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+  }
+  
+  .activeIcon {
+    color: #3b82f6;
+  }
+  
+  .activeIndicator {
+    height: 4px;
+    width: 100%;
+    background-color: #3b82f6;
+    border-radius: 2px;
+    position: absolute;
+    bottom: -10px;
+  }
+  
+  .active {
+    position: relative;
+  }

@@ -1,0 +1,221 @@
+/* Register.scss */
+$primary-blue: #4F46E5;
+$background-color: #f4f6f9;
+$input-border-color: #e0e4e8;
+$text-color-primary: #2c3e50;
+$text-color-secondary: #6c757d;
+
+.register-container {
+  display: flex;
+  max-height: 100vh;
+  background-color: $background-color;
+
+  &__error {
+    color: red;
+    font-size: 16px;
+    margin: 16px 0;
+  }
+  
+  &__image {
+    flex: 1;
+    background: linear-gradient(135deg, $primary-blue 0%, darken($primary-blue, 10%) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+    &-logo {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    &-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    &-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      max-width: 350px;
+    }
+  }
+  
+  &__form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    overflow: auto;
+    
+    &-wrapper {
+      width: 100%;
+      height: 100%;
+      max-width: 400px;
+      padding: 60px;
+    }
+    
+    &-header {
+      text-align: center;
+      margin-bottom: 30px;
+      
+      h1 {
+        font-size: 2rem;
+        color: $text-color-primary;
+        margin-bottom: 10px;
+      }
+      
+      p {
+        color: $text-color-secondary;
+        font-size: 0.9rem;
+      }
+    }
+    
+    &-input {
+      margin-bottom: 20px;
+      
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: $text-color-primary;
+        font-weight: 500;
+      }
+      
+      input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid $input-border-color;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-blue;
+          box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+      }
+    }
+    
+    &-terms {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+      
+      label {
+        font-size: 0.9rem;
+        color: $text-color-secondary;
+        
+        a {
+          color: $primary-blue;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    
+    &-submit {
+      width: 100%;
+      padding: 12px;
+      background-color: $primary-blue;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: darken($primary-blue, 10%);
+      }
+      
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+      }
+    }
+    
+    &-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      
+      &::before, &::after {
+        content: '';
+        flex-grow: 1;
+        height: 1px;
+        background-color: $input-border-color;
+        margin: 0 10px;
+      }
+      
+      span {
+        color: $text-color-secondary;
+        font-size: 0.9rem;
+      }
+    }
+    
+    &-google-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: white;
+      color: $text-color-primary;
+      border: 1px solid $input-border-color;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      
+      svg {
+        margin-right: 10px;
+      }
+      
+      &:hover {
+        background-color: #f8f9fa;
+        border-color: darken($input-border-color, 10%);
+      }
+      
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+      }
+    }
+    
+    &-login {
+      text-align: center;
+      margin-top: 20px;
+      
+      a {
+        color: $primary-blue;
+        text-decoration: none;
+        font-weight: 600;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

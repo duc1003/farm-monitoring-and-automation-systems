@@ -1,7 +1,11 @@
+import SalesDashboard from "../../components/SalesDashboard/SalesDashboard.jsx"
 
 function HomePage() {
   return (
-    <div>HomePage</div>
+    <div>
+      <SalesDashboard/>
+      {/* <div>HomePage</div> */}
+    </div>
   )
 }
 
