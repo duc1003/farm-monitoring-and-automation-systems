@@ -6,7 +6,8 @@ import HomePage from "./pages/home/HomePage.jsx";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
 
-import "./style.scss";
+import "./App.scss";
+import NavHeader from "./components/NavHeader/NavHeader.jsx";
 import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
 import LeftSidebar from "./components/LeftSidebar/LeftSidebar.jsx";
@@ -16,11 +17,10 @@ const Layout = () => {
 
   return (
     <div className={`theme-${darkMode ? "dark" : "light"}`}>
-      <div style={{ display: "flex" }}>
+      <NavHeader />
+      <div className="content">
         <LeftSidebar />
-        <div >
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );

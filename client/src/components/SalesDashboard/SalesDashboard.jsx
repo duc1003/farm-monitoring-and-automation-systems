@@ -1,158 +1,370 @@
-import './SalesDashboard.scss';
-import { Bell, PlusIcon , MoreHorizontal } from 'lucide-react';
+import { useState, useEffect } from "react";
+import {
+  Search,
+  Plus,
+  BarChart3,
+  Grid,
+  Settings,
+  Activity,
+  ArrowRight,
+  ChevronDown,
+  MoreVertical,
+  RefreshCw,
+  Eye,
+} from "lucide-react";
+import "./SalesDashboard.scss"; // Assuming you have a SCSS file for styles
+// SCSS styles inline (normally would be in separate file)
+import axios from "axios";
 
-const SalesDashboard = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user.avatar);
-  
-  const recentSales = [
-    { 
-      name: 'Timothy Williams', 
-      status: 'New', 
-      amount: '+$324.99', 
-      time: 'Today' 
-    },
-    { 
-      name: 'Glen Wood', 
-      status: 'New', 
-      amount: '+$200.00', 
-      time: '2 Day Ago' 
-    },
-    { 
-      name: 'Raymond Johnson', 
-      status: 'Cancelled', 
-      amount: '', 
-      time: '1 Day Ago' 
-    },
-    { 
-      name: 'Kenneth Henderson', 
-      status: 'Completed', 
-      amount: '+$840.99', 
-      time: '2 Days Ago' 
-    }
+export default function SalesDashboard() {
+  const [timeframe, setTimeframe] = useState("Week");
+  const [dataHumidity, setDataHumidity] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/api/data/humidity")
+      .then((res) => {
+        setDataHumidity(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  }, []);
+  console.log(dataHumidity);
+
+  const dailySales = [
+    { day: "Mon", sales: 45 },
+    { day: "Tue", sales: 30 },
+    { day: "Wed", sales: 90 },
+    { day: "Thu", sales: 50 },
+    { day: "Fri", sales: 40 },
+    { day: "Sat", sales: 45 },
   ];
 
-  const topItemSales = [
-    { name: 'DualSense', amount: '$320.24' },
-    { name: 'Gamepad', amount: '$180.9' },
-    { name: 'VR2', amount: '$124.0' },
-    { name: 'Steam codes', amount: '$100.4' }
+  const recentSales = [
+    {
+      id: 1,
+      name: "Timothy Williams",
+      status: "New",
+      amount: 324.99,
+      time: "Today",
+    },
+    {
+      id: 2,
+      name: "Glen Wood",
+      status: "New",
+      amount: 200.0,
+      time: "2 Days Ago",
+    },
+    {
+      id: 3,
+      name: "Raymond Johnson",
+      status: "Cancelled",
+      amount: 0,
+      time: "1 Day Ago",
+    },
+    {
+      id: 4,
+      name: "Kenneth Henderson",
+      status: "Completed",
+      amount: 840.99,
+      time: "2 Days Ago",
+    },
+  ];
+
+  const topItems = [
+    { name: "DualSense", category: "Controller", amount: 320.24 },
+    { name: "Gamepad", category: "Accessory", amount: 180.9 },
+    { name: "VR2", category: "Accessory", amount: 124.0 },
+    { name: "Steam codes", category: "Subscription", amount: 100.4 },
   ];
 
   return (
-    <div className="sales-dashboard">
-      <div className="header">
-        <div className="search-container">
-          <input type="text" placeholder="Start searching here..." />
-        </div>
-        <div className="header-icons">
-          <Bell />
-          <div className="profile-icon">
-            <img src={user.avatar} alt={user.fullname} />
+    <>
+      {/* <style>{styles}</style> */}
+      <div className="dashboard-container">
+        <div className="dashboard-card">
+          {/* Main Content */}
+          <div className="main-container">
+            {/* Main Dashboard */}
+            <div className="dashboard-content">
+              <div className="dashboard-header">
+                <h1 className="dashboard-title">Your Sales Analysis</h1>
+                <div className="dashboard-actions">
+                  <button className="btn btn-primary">
+                    <Plus size={16} />
+                    Add Widget
+                  </button>
+                  <button className="btn btn-outline btn-icon">
+                    <Eye size={18} />
+                  </button>
+                  <button className="btn btn-outline">Filter</button>
+                </div>
+              </div>
+
+              {/* Widgets Grid */}
+              <div className="widgets-grid">
+                {/* AI Assistant Widget */}
+                <div className="col-span-4">
+                  <div className="widget widget-dark assistant-widget">
+                    <h3 className="assistant-title">AI Assistant</h3>
+                    <p className="assistant-description">
+                      Analyze product sales over last year
+                      <br />
+                      Compare revenue, quality, sales and brand
+                    </p>
+                    <div className="assistant-shape">
+                      <svg
+                        viewBox="0 0 200 200"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M46.5,-73.8C59.7,-67.3,69.8,-54.1,73.5,-40C77.2,-25.9,74.4,-11,71.8,2.9C69.2,16.9,66.9,29.8,60.4,41.5C53.9,53.2,43.3,63.6,30.6,68.4C17.9,73.2,3,72.4,-12.1,71.2C-27.2,70,-42.5,68.4,-53.9,60.7C-65.2,53,-72.5,39.1,-76.7,24.5C-80.9,9.8,-82.1,-5.5,-76.9,-17.6C-71.7,-29.7,-60.2,-38.6,-48,-46.5C-35.8,-54.3,-22.9,-61.2,-8.4,-69.7C6.1,-78.3,33.3,-80.2,46.5,-73.8Z"
+                          transform="translate(100 100)"
+                        />
+                      </svg>
+                    </div>
+                    <button className="assistant-btn">
+                      Analyze product sales
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Total Sales Widget */}
+                <div className="col-span-4">
+                  <div className="widget widget-light">
+                    <div className="widget-header">
+                      <div className="widget-title">
+                        <BarChart3 size={18} color="var(--color-gray-400)" />
+                        <span>Total Sales</span>
+                      </div>
+                      <div className="widget-actions">
+                        <div className="dropdown">
+                          <span>{timeframe}</span>
+                          <ChevronDown size={16} />
+                        </div>
+                        <button>
+                          <MoreVertical
+                            size={18}
+                            color="var(--color-gray-400)"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="humidity-chart">
+                      {/* Label mốc độ ẩm */}
+                      <div className="y-axis">
+                        <div className="y-label">100</div>
+                        <div className="y-label">80</div>
+                        <div className="y-label">60</div>
+                        <div className="y-label">40</div>
+                        <div className="y-label">20</div>
+                        <div className="y-label">0</div>
+                      </div>
+                      {/* Biểu đồ độ ẩm */}
+                      <div className="humidity-chart-container">
+                        {dataHumidity.map((item, index) => (
+                          <div key={index} className="chart-column">
+                            <div
+                              className={`chart-bar ${
+                                item.timestamps === "Wed" ? "active" : ""
+                              }`}
+                              style={{
+                                height: `${(item.humidity / 100) * 140}px`,
+                              }}
+                            >
+                            </div>
+                            <span className="chart-label">
+                              {item.timestamps}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sales Revenue Widget */}
+                <div className="col-span-4">
+                  <div className="widget widget-light">
+                    <div className="widget-header">
+                      <div className="widget-title">
+                        <Activity size={18} color="var(--color-gray-400)" />
+                        <span>Sales Revenue</span>
+                      </div>
+                      <button>
+                        <MoreVertical size={18} color="var(--color-gray-400)" />
+                      </button>
+                    </div>
+                    <div className="revenue-stats">
+                      <p className="stats-indicator">+24% for 1 day</p>
+                      <div className="revenue-comparison">
+                        <div>
+                          <h2 className="revenue-amount">$1,609.18</h2>
+                          <p className="revenue-label">Received Amount</p>
+                        </div>
+                        <div style={{ textAlign: "right" }}>
+                          <h2 className="revenue-amount expected">$2,189.21</h2>
+                          <p className="revenue-label">Expected Amount</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Recent Sales Widget */}
+                <div className="col-span-6">
+                  <div className="widget widget-light">
+                    <div className="widget-header">
+                      <div className="widget-title">
+                        <Settings size={16} color="var(--color-gray-400)" />
+                        <span>Recent sales</span>
+                      </div>
+                      <div className="widget-actions">
+                        <button className="btn btn-outline btn-icon">
+                          <Settings size={14} />
+                        </button>
+                        <div className="dropdown">
+                          <span>{timeframe}</span>
+                          <ChevronDown size={16} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sales-list">
+                      {recentSales.map((sale) => (
+                        <div key={sale.id} className="sale-item">
+                          <div className="sale-user">
+                            <div className="sale-avatar">
+                              <img
+                                src="/api/placeholder/32/32"
+                                alt={sale.name}
+                              />
+                            </div>
+                            <div className="sale-info">
+                              <h4 className="sale-name">{sale.name}</h4>
+                              <p className="sale-time">{sale.time}</p>
+                            </div>
+                          </div>
+                          <div className="sale-details">
+                            <span
+                              className={`sale-badge ${sale.status.toLowerCase()}`}
+                            >
+                              {sale.status}
+                            </span>
+                            {sale.amount > 0 && (
+                              <span className="sale-amount">{`+$${sale.amount.toFixed(
+                                2
+                              )}`}</span>
+                            )}
+                            <button>
+                              <RefreshCw
+                                size={16}
+                                color="var(--color-gray-400)"
+                              />
+                            </button>
+                            <button>
+                              <MoreVertical
+                                size={16}
+                                color="var(--color-gray-400)"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Growth Widget */}
+                <div className="col-span-3">
+                  <div className="widget widget-light">
+                    <div className="widget-header">
+                      <div className="widget-title">
+                        <Activity size={16} color="var(--color-gray-400)" />
+                        <span>Growth</span>
+                      </div>
+                      <button>
+                        <MoreVertical size={16} color="var(--color-gray-400)" />
+                      </button>
+                    </div>
+                    <div className="growth-chart">
+                      <div className="chart-container">
+                        <svg width="100" height="100" viewBox="0 0 100 100">
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="45"
+                            fill="none"
+                            stroke="#e6e6e6"
+                            strokeWidth="10"
+                          />
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="45"
+                            fill="none"
+                            stroke="#4f6ef7"
+                            strokeWidth="10"
+                            strokeDasharray="282.7"
+                            strokeDashoffset="76.33"
+                            transform="rotate(-90 50 50)"
+                          />
+                        </svg>
+                        <div className="chart-overlay">
+                          <span className="growth-rate">+73,1%</span>
+                          <span className="growth-label">Growth rate</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Top Items Widget */}
+                <div className="col-span-3">
+                  <div className="widget widget-light">
+                    <div className="widget-header">
+                      <div className="widget-title">
+                        <Settings size={16} color="var(--color-gray-400)" />
+                        <span>Top Item Sales</span>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: "0.75rem",
+                          color: "var(--color-primary)",
+                        }}
+                      >
+                        View All
+                      </span>
+                    </div>
+                    <div className="top-items-list">
+                      {topItems.map((item, index) => (
+                        <div key={index} className="item-row">
+                          <div className="item-info">
+                            <h4 className="item-name">{item.name}</h4>
+                            <p className="item-category">{item.category}</p>
+                          </div>
+                          <div className="item-stats">
+                            <div className="progress-bar">
+                              <div
+                                className="progress-value"
+                                style={{
+                                  width: `${(item.amount / 320.24) * 100}%`,
+                                }}
+                              ></div>
+                            </div>
+                            <span className="item-amount">${item.amount}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <h1>Your Sales Analysis</h1>
-
-      <div className="dashboard-grid">
-        <div className="ai-assistant">
-          <div className="ai-content">
-            <h3>AI Assistant</h3>
-            <p>Analyze product sales over last year</p>
-            <p>Compare revenue, quality, sales and brand</p>
-            <button>
-              Analyze product sales
-              <PlusIcon />
-            </button>
-          </div>
-        </div>
-
-        <div className="total-sales">
-          <div className="sales-header">
-            <h4>Total Sales</h4>
-            <div className="dropdown">
-              Week <MoreHorizontal />
-            </div>
-          </div>
-          <div className="sales-chart">
-            {/* Bar chart placeholder */}
-            <div className="bar-chart">
-              {[...Array(7)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`bar ${i === 2 ? 'highlighted' : ''}`}
-                ></div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="sales-revenue">
-          <div className="sales-header">
-            <h4>Sales Revenue</h4>
-            <div className="dropdown">
-              <MoreHorizontal />
-            </div>
-          </div>
-          <div className="revenue-amount">
-            <div className="previous">$1,609.18</div>
-            <div className="current">$2,189.21</div>
-          </div>
-        </div>
-
-        <div className="recent-sales">
-          <div className="sales-header">
-            <h4>Recent sales</h4>
-            <div className="dropdown">
-              Week <MoreHorizontal />
-            </div>
-          </div>
-          <div className="sales-list">
-            {recentSales.map((sale, index) => (
-              <div key={index} className="sale-item">
-                <div className="sale-avatar">
-                  <img src="/api/placeholder/40/40" alt={sale.name} />
-                </div>
-                <div className="sale-details">
-                  <span className="name">{sale.name}</span>
-                  <span className={`status ${sale.status.toLowerCase()}`}>
-                    {sale.status}
-                  </span>
-                </div>
-                <div className="sale-amount">{sale.amount}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="growth-section">
-          <div className="sales-header">
-            <h4>Growth</h4>
-          </div>
-          <div className="growth-chart">
-            <div className="growth-percentage">+73.1%</div>
-            <div className="growth-circle"></div>
-          </div>
-        </div>
-
-        <div className="top-item-sales">
-          <div className="sales-header">
-            <h4>Top Item Sales</h4>
-            <a href="#">View All</a>
-          </div>
-          <div className="top-items-list">
-            {topItemSales.map((item, index) => (
-              <div key={index} className="top-item">
-                <span className="item-name">{item.name}</span>
-                <span className="item-amount">{item.amount}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
-};
-
-export default SalesDashboard;
+}

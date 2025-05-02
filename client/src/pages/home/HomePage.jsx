@@ -1,5 +1,5 @@
-import SalesDashboard from "../../components/SalesDashboard/SalesDashboard.jsx"
-
+import SalesDashboard from "../../components/SalesDashboard/SalesDashboard.jsx";
+import "./homePage.scss";
 function HomePage() {
   return (
     <div>
