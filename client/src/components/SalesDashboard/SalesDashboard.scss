@@ -51,7 +51,8 @@ img {
 /* Dashboard layout */
 .dashboard-container {
   background-color: white;
-  height: 91.5vh;
+  // height: 91.5vh;
+  height: 100rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -423,6 +424,16 @@ img {
   font-size: 12px;
   text-align: center;
 }
+
+
+/* Temperature */
+.card-content {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+
 
 /* Sales Revenue */
 .revenue-stats {

@@ -1,0 +1,71 @@
+.widget {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+
+  .widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .widget-title {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+
+    span {
+      margin-left: 8px;
+    }
+  }
+}
+
+.light-chart {
+  height: 80%;
+  .chart-rows{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 20px;
+    max-height: 100%;
+    overflow-y: auto;
+    
+
+    .chart-row {
+      .chart-label {
+        width: 60px;
+        font-size: 14px;
+        color: #555;
+        text-align: right;
+        white-space: nowrap;
+      }
+  
+      .chart-bar {
+        height: 12px;
+        background-color: #ffeb3b;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+  
+        &.active {
+          background-color: #ff9800;
+        }
+      }
+    }
+  }
+  .x-axis {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 8px;
+    padding-right: 8px;
+
+    .x-label {
+      font-size: 12px;
+      color: #888;
+      flex: 1;
+      text-align: left;
+    }
+  }
+}

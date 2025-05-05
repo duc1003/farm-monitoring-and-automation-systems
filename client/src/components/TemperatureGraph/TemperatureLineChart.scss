@@ -1,0 +1,46 @@
+.temperature-line-chart {
+    width: 100%;
+    height: 100%;
+    // padding: 1rem;
+  
+    .recharts-wrapper {
+      font-family: 'Arial', sans-serif;
+    }
+  
+    .recharts-cartesian-grid line {
+      stroke: #e5e7eb; // Light gray
+    }
+  
+    .recharts-tooltip-label {
+      font-weight: bold;
+    }
+  
+    .recharts-tooltip-item {
+      color: #f97316;
+      margin-left: 12px;
+    }
+  
+    .recharts-yAxis .recharts-text {
+      font-size: 12px;
+      fill: #4b5563;
+    }
+  
+    .recharts-xAxis .recharts-text {
+      font-size: 12px;
+      fill: #4b5563;
+    }
+  
+    .chart-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+  
+    .chart-icon {
+      margin-right: 0.5rem;
+      color: #f97316;
+    }
+  }
+  

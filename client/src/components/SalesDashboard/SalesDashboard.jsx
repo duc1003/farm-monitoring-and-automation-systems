@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-  Search,
-  Plus,
   BarChart3,
-  Grid,
   Settings,
   Activity,
   ArrowRight,
@@ -12,9 +9,10 @@ import {
   RefreshCw,
   Eye,
 } from "lucide-react";
-import "./SalesDashboard.scss"; // Assuming you have a SCSS file for styles
-// SCSS styles inline (normally would be in separate file)
+import "./SalesDashboard.scss";
 import axios from "axios";
+import TemperatureGraph from "../TemperatureGraph/TemperatureGraph";
+import LightChart from "../LightChart/LightChart";
 
 export default function SalesDashboard() {
   const [timeframe, setTimeframe] = useState("Week");
@@ -31,15 +29,6 @@ export default function SalesDashboard() {
       });
   }, []);
   console.log(dataHumidity);
-
-  const dailySales = [
-    { day: "Mon", sales: 45 },
-    { day: "Tue", sales: 30 },
-    { day: "Wed", sales: 90 },
-    { day: "Thu", sales: 50 },
-    { day: "Fri", sales: 40 },
-    { day: "Sat", sales: 45 },
-  ];
 
   const recentSales = [
     {
@@ -91,10 +80,10 @@ export default function SalesDashboard() {
               <div className="dashboard-header">
                 <h1 className="dashboard-title">Your Sales Analysis</h1>
                 <div className="dashboard-actions">
-                  <button className="btn btn-primary">
+                  {/* <button className="btn btn-primary">
                     <Plus size={16} />
                     Add Widget
-                  </button>
+                  </button> */}
                   <button className="btn btn-outline btn-icon">
                     <Eye size={18} />
                   </button>
@@ -137,9 +126,9 @@ export default function SalesDashboard() {
                     <div className="widget-header">
                       <div className="widget-title">
                         <BarChart3 size={18} color="var(--color-gray-400)" />
-                        <span>Total Sales</span>
+                        <span>Humidity</span>
                       </div>
-                      <div className="widget-actions">
+                      {/* <div className="widget-actions">
                         <div className="dropdown">
                           <span>{timeframe}</span>
                           <ChevronDown size={16} />
@@ -150,7 +139,7 @@ export default function SalesDashboard() {
                             color="var(--color-gray-400)"
                           />
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="humidity-chart">
                       {/* Label mốc độ ẩm */}
@@ -173,8 +162,7 @@ export default function SalesDashboard() {
                               style={{
                                 height: `${(item.humidity / 100) * 140}px`,
                               }}
-                            >
-                            </div>
+                            ></div>
                             <span className="chart-label">
                               {item.timestamps}
                             </span>
@@ -185,96 +173,26 @@ export default function SalesDashboard() {
                   </div>
                 </div>
 
-                {/* Sales Revenue Widget */}
+                {/* temperature graph */}
                 <div className="col-span-4">
                   <div className="widget widget-light">
                     <div className="widget-header">
                       <div className="widget-title">
                         <Activity size={18} color="var(--color-gray-400)" />
-                        <span>Sales Revenue</span>
+                        <span>Temperature</span>
                       </div>
                       <button>
                         <MoreVertical size={18} color="var(--color-gray-400)" />
                       </button>
                     </div>
-                    <div className="revenue-stats">
-                      <p className="stats-indicator">+24% for 1 day</p>
-                      <div className="revenue-comparison">
-                        <div>
-                          <h2 className="revenue-amount">$1,609.18</h2>
-                          <p className="revenue-label">Received Amount</p>
-                        </div>
-                        <div style={{ textAlign: "right" }}>
-                          <h2 className="revenue-amount expected">$2,189.21</h2>
-                          <p className="revenue-label">Expected Amount</p>
-                        </div>
-                      </div>
+                    <div className="card-content">
+                      <TemperatureGraph />
                     </div>
                   </div>
                 </div>
 
-                {/* Recent Sales Widget */}
-                <div className="col-span-6">
-                  <div className="widget widget-light">
-                    <div className="widget-header">
-                      <div className="widget-title">
-                        <Settings size={16} color="var(--color-gray-400)" />
-                        <span>Recent sales</span>
-                      </div>
-                      <div className="widget-actions">
-                        <button className="btn btn-outline btn-icon">
-                          <Settings size={14} />
-                        </button>
-                        <div className="dropdown">
-                          <span>{timeframe}</span>
-                          <ChevronDown size={16} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sales-list">
-                      {recentSales.map((sale) => (
-                        <div key={sale.id} className="sale-item">
-                          <div className="sale-user">
-                            <div className="sale-avatar">
-                              <img
-                                src="/api/placeholder/32/32"
-                                alt={sale.name}
-                              />
-                            </div>
-                            <div className="sale-info">
-                              <h4 className="sale-name">{sale.name}</h4>
-                              <p className="sale-time">{sale.time}</p>
-                            </div>
-                          </div>
-                          <div className="sale-details">
-                            <span
-                              className={`sale-badge ${sale.status.toLowerCase()}`}
-                            >
-                              {sale.status}
-                            </span>
-                            {sale.amount > 0 && (
-                              <span className="sale-amount">{`+$${sale.amount.toFixed(
-                                2
-                              )}`}</span>
-                            )}
-                            <button>
-                              <RefreshCw
-                                size={16}
-                                color="var(--color-gray-400)"
-                              />
-                            </button>
-                            <button>
-                              <MoreVertical
-                                size={16}
-                                color="var(--color-gray-400)"
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                {/* Light */}
+                <LightChart />
 
                 {/* Growth Widget */}
                 <div className="col-span-3">
