@@ -1,72 +1,32 @@
 import { useState, useEffect } from "react";
 import {
-  BarChart3,
-  Settings,
   Activity,
   ArrowRight,
-  ChevronDown,
   MoreVertical,
-  RefreshCw,
   Eye,
 } from "lucide-react";
 import "./SalesDashboard.scss";
 import axios from "axios";
-import TemperatureGraph from "../TemperatureGraph/TemperatureGraph";
-import LightChart from "../LightChart/LightChart";
+import TemperatureGraph from "../Chart/TemperatureGraph/TemperatureGraph";
+import LightChart from "../Chart/LightChart/LightChart";
+import SoilChart from "../Chart/SoilChart/SoilChart";
+import HumidityChart from "../Chart/HumidityChart/HumidityChart";
+import ClearSky from "../../assets/images/clear-sky.png";
+import Rain from "../../assets/images/rain_light.png";
 
 export default function SalesDashboard() {
-  const [timeframe, setTimeframe] = useState("Week");
-  const [dataHumidity, setDataHumidity] = useState([]);
-
+  const [dataRain, setDataRain] = useState([]);
+  
   useEffect(() => {
     axios
-      .get("http://localhost:8888/api/data/humidity")
+      .get("http://localhost:8888/api/data/rain")
       .then((res) => {
-        setDataHumidity(res.data);
+        setDataRain(res.data);
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
       });
   }, []);
-  console.log(dataHumidity);
-
-  const recentSales = [
-    {
-      id: 1,
-      name: "Timothy Williams",
-      status: "New",
-      amount: 324.99,
-      time: "Today",
-    },
-    {
-      id: 2,
-      name: "Glen Wood",
-      status: "New",
-      amount: 200.0,
-      time: "2 Days Ago",
-    },
-    {
-      id: 3,
-      name: "Raymond Johnson",
-      status: "Cancelled",
-      amount: 0,
-      time: "1 Day Ago",
-    },
-    {
-      id: 4,
-      name: "Kenneth Henderson",
-      status: "Completed",
-      amount: 840.99,
-      time: "2 Days Ago",
-    },
-  ];
-
-  const topItems = [
-    { name: "DualSense", category: "Controller", amount: 320.24 },
-    { name: "Gamepad", category: "Accessory", amount: 180.9 },
-    { name: "VR2", category: "Accessory", amount: 124.0 },
-    { name: "Steam codes", category: "Subscription", amount: 100.4 },
-  ];
 
   return (
     <>
@@ -120,59 +80,8 @@ export default function SalesDashboard() {
                   </div>
                 </div>
 
-                {/* Total Sales Widget */}
-                <div className="col-span-4">
-                  <div className="widget widget-light">
-                    <div className="widget-header">
-                      <div className="widget-title">
-                        <BarChart3 size={18} color="var(--color-gray-400)" />
-                        <span>Humidity</span>
-                      </div>
-                      {/* <div className="widget-actions">
-                        <div className="dropdown">
-                          <span>{timeframe}</span>
-                          <ChevronDown size={16} />
-                        </div>
-                        <button>
-                          <MoreVertical
-                            size={18}
-                            color="var(--color-gray-400)"
-                          />
-                        </button>
-                      </div> */}
-                    </div>
-                    <div className="humidity-chart">
-                      {/* Label mốc độ ẩm */}
-                      <div className="y-axis">
-                        <div className="y-label">100</div>
-                        <div className="y-label">80</div>
-                        <div className="y-label">60</div>
-                        <div className="y-label">40</div>
-                        <div className="y-label">20</div>
-                        <div className="y-label">0</div>
-                      </div>
-                      {/* Biểu đồ độ ẩm */}
-                      <div className="humidity-chart-container">
-                        {dataHumidity.map((item, index) => (
-                          <div key={index} className="chart-column">
-                            <div
-                              className={`chart-bar ${
-                                item.timestamps === "Wed" ? "active" : ""
-                              }`}
-                              style={{
-                                height: `${(item.humidity / 100) * 140}px`,
-                              }}
-                            ></div>
-                            <span className="chart-label">
-                              {item.timestamps}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+                {/* Humidity Widget */}
+                <HumidityChart/>
                 {/* temperature graph */}
                 <div className="col-span-4">
                   <div className="widget widget-light">
@@ -194,13 +103,22 @@ export default function SalesDashboard() {
                 {/* Light */}
                 <LightChart />
 
-                {/* Growth Widget */}
+                {/* Rain Widget */}
                 <div className="col-span-3">
                   <div className="widget widget-light">
                     <div className="widget-header">
                       <div className="widget-title">
-                        <Activity size={16} color="var(--color-gray-400)" />
-                        <span>Growth</span>
+                        <img
+                          src={ClearSky}
+                          alt="Rain Icon"
+                          style={{
+                            width: "42px",
+                            height: "42px",
+                            objectFit: "contain",
+                            filter: "grayscale(100%)",
+                          }}
+                        />
+                        <span>Rain</span>
                       </div>
                       <button>
                         <MoreVertical size={16} color="var(--color-gray-400)" />
@@ -208,8 +126,8 @@ export default function SalesDashboard() {
                     </div>
                     <div className="growth-chart">
                       <div className="chart-container">
-                        <svg width="100" height="100" viewBox="0 0 100 100">
-                          <circle
+                        {/* <svg width="100" height="100" viewBox="0 0 100 100"> */}
+                        {/* <circle
                             cx="50"
                             cy="50"
                             r="45"
@@ -227,57 +145,44 @@ export default function SalesDashboard() {
                             strokeDasharray="282.7"
                             strokeDashoffset="76.33"
                             transform="rotate(-90 50 50)"
-                          />
-                        </svg>
+                          /> */}
+                        {/* </svg> */}
                         <div className="chart-overlay">
-                          <span className="growth-rate">+73,1%</span>
-                          <span className="growth-label">Growth rate</span>
+                          {dataRain.rain === 1 ? (
+                            <>
+                              <div className="rain-status">Rain</div>
+                              <img
+                                src={Rain}
+                                alt="Rain Icon"
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                }}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <div className="rain-status">Sunny</div>
+                              <img
+                                src={ClearSky}
+                                alt="Rain Icon"
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                }}
+                              />
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Top Items Widget */}
-                <div className="col-span-3">
-                  <div className="widget widget-light">
-                    <div className="widget-header">
-                      <div className="widget-title">
-                        <Settings size={16} color="var(--color-gray-400)" />
-                        <span>Top Item Sales</span>
-                      </div>
-                      <span
-                        style={{
-                          fontSize: "0.75rem",
-                          color: "var(--color-primary)",
-                        }}
-                      >
-                        View All
-                      </span>
-                    </div>
-                    <div className="top-items-list">
-                      {topItems.map((item, index) => (
-                        <div key={index} className="item-row">
-                          <div className="item-info">
-                            <h4 className="item-name">{item.name}</h4>
-                            <p className="item-category">{item.category}</p>
-                          </div>
-                          <div className="item-stats">
-                            <div className="progress-bar">
-                              <div
-                                className="progress-value"
-                                style={{
-                                  width: `${(item.amount / 320.24) * 100}%`,
-                                }}
-                              ></div>
-                            </div>
-                            <span className="item-amount">${item.amount}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                {/* Soil Widget */}
+                <SoilChart />
               </div>
             </div>
           </div>

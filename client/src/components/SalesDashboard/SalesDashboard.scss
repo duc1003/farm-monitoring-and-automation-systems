@@ -351,81 +351,6 @@ img {
     background-color: var(--color-secondary-light);
   }
 }
-
-/* humidity Chart */
-.humidity-chart {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  padding: 10px;
-  width: 100%; /* Chiếm toàn bộ chiều rộng của container */
-  height: 80%;
-  // overflow-x: auto; /* Cho phép cuộn ngang nếu cần */
-  white-space: nowrap; /* Ngăn chặn việc xuống dòng */
-  position: relative;
-}
-.humidity-chart-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  padding: 10px;
-  overflow-x: auto; /* Cho phép cuộn ngang nếu cần */
-}
-// .humidity-value {
-//   position: absolute;
-//   top: -20px; /* Đặt giá trị trên đỉnh thanh */
-//   left: 50%;
-//   transform: translateX(-50%); /* Căn giữa giá trị */
-//   font-size: 12px;
-//   color: #333;
-//   font-weight: bold;
-// }
-
-.y-axis {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  margin-right: 10px;
-  position: sticky; /* Giữ vị trí khi cuộn */
-  left: 0; /* Đảm bảo y-axis đứng yên khi cuộn ngang */
-  background-color: transparent; /* Thêm nền để làm rõ vị trí */
-  z-index: 10; /* Đảm bảo y-axis luôn nằm trên các phần tử khác */
-}
-
-.y-label {
-  font-size: 14px;
-  text-align: center;
-  color: #333;
-}
-
-.chart-column {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30px; /* Đặt chiều rộng tối đa cho mỗi cột */
-  margin: 0 5px; /* Khoảng cách giữa các cột */
-}
-
-.chart-bar {
-  width: 10px; /* Đảm bảo chiều rộng thanh đồ thị chiếm hết cột */
-  background-color: #f97316;
-  transition: background-color 0.3s;
-  max-height: 100%; /* Đảm bảo chiều cao thanh không vượt quá cột */
-  border-radius: 5px 5px 0 0; /* Tạo hiệu ứng tròn ở phía trên */
-}
-
-.chart-bar.active {
-  background-color: #ff5722; /* Màu khi active */
-}
-
-.chart-label {
-  margin-top: 5px;
-  font-size: 12px;
-  text-align: center;
-}
-
-
 /* Temperature */
 .card-content {
   width: 100%;
@@ -571,8 +496,9 @@ img {
   font-weight: 700;
 }
 
-.growth-label {
-  font-size: 0.75rem;
+.rain-status {
+  font-size: 1.25rem;
+  margin-right: 1.25rem;
   color: var(--color-gray-400);
 }
 
