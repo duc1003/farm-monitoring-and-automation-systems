@@ -11,6 +11,7 @@ import NavHeader from "./components/NavHeader/NavHeader.jsx";
 import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
 import LeftSidebar from "./components/LeftSidebar/LeftSidebar.jsx";
+import ChartAnalysis from "./components/ChartAnalysis/ChartAnalysis.jsx";
 
 const Layout = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "/", element: <HomePage /> },
+      { path: "/home/dashboard", element: <HomePage /> },
+      { path: "/home/chart", element: <ChartAnalysis /> },
     ],
   },
   { path: "/login", element: <Login /> },

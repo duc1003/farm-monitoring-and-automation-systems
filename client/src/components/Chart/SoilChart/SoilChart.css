@@ -1,0 +1,48 @@
+.soil-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 85%;
+}
+.soil-chart .chart-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.soil-chart .chart-row .chart-label {
+  width: 60px;
+  font-size: 14px;
+  color: #555;
+  text-align: right;
+  flex-shrink: 0;
+}
+.soil-chart .chart-row .chart-bar {
+  flex-grow: 1;
+  height: 20px;
+  background-color: #4caf50;
+  border-radius: 4px;
+  position: relative;
+}
+.soil-chart .chart-row .chart-bar::after {
+  content: attr(data-value);
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #333;
+}
+.soil-chart .x-axis {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+  padding-right: 8px;
+}
+.soil-chart .x-axis .x-label {
+  font-size: 12px;
+  color: #888;
+  flex: 1;
+  text-align: left;
+}/*# sourceMappingURL=SoilChart.css.map */

@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import userRoute from './routes/users.routes.js';
 import sensorRoute from './routes/sensor_data.routes.js';
 import cors from 'cors';
-
+import { syncDataFromFirebase } from './services/pull_data/PullData.js';
 
 const app = express();
 dotenv.config();
@@ -18,4 +18,7 @@ app.use('/api/data', sensorRoute);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server started at http://localhost:${process.env.PORT}`);
+    syncDataFromFirebase().catch(err => {
+    console.error("❌ Lỗi khi đồng bộ dữ liệu từ Firebase:", err);
+  });
 });

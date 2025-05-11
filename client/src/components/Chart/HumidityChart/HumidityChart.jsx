@@ -17,7 +17,7 @@ function HumidityChart() {
       }, []);
       console.log(dataHumidity);
   return (
-    <div className="col-span-4">
+    <div className="col-span-6">
       <div className="widget widget-light">
         <div className="widget-header">
           <div className="widget-title">

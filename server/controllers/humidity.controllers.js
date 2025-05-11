@@ -33,3 +33,23 @@ export const getLatestRainStatus = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+export const getLatestHumidityData = async (req, res) => {
+  try {
+    const oldestData = await SensorData.findOne({
+      attributes: ['humidity', 'timestamp'],
+      order: [['timestamp', 'DESC']],
+    });
+
+    if (!oldestData) {
+      return res.status(404).json({ message: 'No data found' });
+    }
+
+    res.status(200).json({
+      humidity: oldestData.humidity,
+      timestamp: oldestData.timestamp,
+    });
+  } catch (error) {
+    console.error('Error fetching oldest humidity data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};

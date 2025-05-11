@@ -5,7 +5,7 @@ import {
   MoreVertical,
   Eye,
 } from "lucide-react";
-import "./SalesDashboard.scss";
+import "./ChartAnalysis.scss";
 import axios from "axios";
 import TemperatureGraph from "../Chart/TemperatureGraph/TemperatureGraph";
 import LightChart from "../Chart/LightChart/LightChart";
@@ -14,7 +14,7 @@ import HumidityChart from "../Chart/HumidityChart/HumidityChart";
 import ClearSky from "../../assets/images/clear-sky.png";
 import Rain from "../../assets/images/rain_light.png";
 
-export default function SalesDashboard() {
+export default function ChartAnalysis() {
   const [dataRain, setDataRain] = useState([]);
   
   useEffect(() => {
@@ -31,14 +31,14 @@ export default function SalesDashboard() {
   return (
     <>
       {/* <style>{styles}</style> */}
-      <div className="dashboard-container">
+      <div className="chart-analysis-container">
         <div className="dashboard-card">
           {/* Main Content */}
           <div className="main-container">
             {/* Main Dashboard */}
             <div className="dashboard-content">
               <div className="dashboard-header">
-                <h1 className="dashboard-title">Your Sales Analysis</h1>
+                <h1 className="dashboard-title">Your Charts Analysis</h1>
                 <div className="dashboard-actions">
                   {/* <button className="btn btn-primary">
                     <Plus size={16} />
@@ -54,7 +54,7 @@ export default function SalesDashboard() {
               {/* Widgets Grid */}
               <div className="widgets-grid">
                 {/* AI Assistant Widget */}
-                <div className="col-span-4">
+                {/* <div className="col-span-4">
                   <div className="widget widget-dark assistant-widget">
                     <h3 className="assistant-title">AI Assistant</h3>
                     <p className="assistant-description">
@@ -78,12 +78,12 @@ export default function SalesDashboard() {
                       <ArrowRight size={16} />
                     </button>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Humidity Widget */}
                 <HumidityChart/>
                 {/* temperature graph */}
-                <div className="col-span-4">
+                <div className="col-span-6">
                   <div className="widget widget-light">
                     <div className="widget-header">
                       <div className="widget-title">

@@ -1,30 +1,36 @@
 import { useState } from "react";
 import "./LeftSidebar.module.scss";
 import { Grid, BarChart3, Settings, Plus, RefreshCw } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LeftSidebar = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
+  const navigate = useNavigate();
 
   const menuItems = [
     {
       icon: Grid,
       name: "dashboard",
       title: "Dashboard",
+      url: "/home/dashboard",
     },
     {
       icon: BarChart3,
       name: "add-widget",
       title: "Add Widget",
+      url: "/home/chart",
     },
     {
       icon: Plus,
       name: "analytics",
       title: "Analytics",
+      url: "/home/plus",
     },
     {
       icon: Settings,
       name: "settings",
       title: "Settings",
+      url: "/home/settings",
     },
   ];
 
@@ -44,7 +50,10 @@ const LeftSidebar = () => {
           className={`sidebar-icon ${
             activeTab === item.name ? 'active' : ""
           }`}
-          onClick={() => setActiveTab(item.name)}
+          onClick={() => {
+            setActiveTab(item.name)
+            navigate(item.url);
+          }}
           title={item.title}
         >
           <item.icon
