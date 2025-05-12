@@ -9,6 +9,8 @@ const Dashboard = () => {
   const [dataHumidity, setDataHumidity] = useState([]);
   const [dataMoisture, setDataMoisture] = useState([]);
   const [dataTemperature, setDataTemperature] = useState([]);
+  const [dataGrowth, setDataGrowth] = useState([]);
+  const [dataSensor, setDataSensor] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:8888/api/data/rain")
@@ -59,18 +61,66 @@ const Dashboard = () => {
         console.error("Error fetching data:", err);
       });
   }, []);
+  useEffect(() => {
+    axios
+      .post("http://localhost:8888/api/prediction")
+      .then((res) => {
+        setDataGrowth(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/api/data/latestSensorData")
+      .then((res) => {
+        setDataSensor(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  }, []);
+  console.log("data sensor: ", dataSensor);
+  console.log("data grow: ", dataGrowth);
+  const getGrowthLevelClass = (level) => {
+    switch (level) {
+      case "tốt":
+        return "good";
+      case "trung bình":
+        return "medium";
+      case "kém":
+        return "bad";
+      default:
+        return "";
+    }
+  };
+  const getGrowthConclusion = (label) => {
+    if (label === "kém") {
+      return "Cây đang trong tình trạng kém phát triển — cần được chăm sóc ngay để phục hồi.";
+    }
+    if (label === "trung bình") {
+      return "Cây đang phát triển ở mức trung bình — vẫn còn cơ hội cải thiện nếu được theo dõi sát sao.";
+    }
+    return "Cây đang phát triển mạnh mẽ — hãy tiếp tục duy trì điều kiện chăm sóc hiện tại!";
+  };
 
   return (
     <div className="dashboard-container">
       <div className="metrics-grid">
-        <div className="ai-assistant-card ">
-          <h1 className="card-title">AI Assistant</h1>
-          <p className="card-description">The tree is improving well</p>
-          {/* <p className="card-description">
-            Compare revenue, quality, sales and brand
-          </p> */}
+        <div
+          className={`ai-assistant-card ${getGrowthLevelClass(
+            dataGrowth.prediction
+          )}`}
+        >
+          <h1 className="card-title">AI Hỗ trợ</h1>
+          <p className="card-description">
+            {/* {getGrowthConclusion(dataGrowth.prediction)} */}
+            {getGrowthConclusion(dataGrowth.prediction)}
+          </p>
+          <p className="card-description">{dataGrowth.suggest}</p>
 
-          <button className="analyze-button">
+          {/* <button className="analyze-button">
             <span>Analyze</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,31 +137,36 @@ const Dashboard = () => {
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
-          </button>
+          </button> */}
         </div>
         <MetricCard
-          title="Temperature"
+          title="Nhiệt độ"
           value={dataTemperature.temperature}
-          unit="°F"
+          unit="°C"
           type="temperature"
         />
 
         <MetricCard
-          title="Light Intensity"
+          title="Độ sáng"
           value={dataLight.light}
           unit="lux"
           type="light"
         />
 
-        <MetricCard title="Rain" value={dataRain.rain} unit="%" type="rain" />
+        <MetricCard title="Mưa" value={dataRain.rain} unit="-" type="rain" />
 
         <MetricCard
-          title="Soil Moisture"
+          title="Độ ẩm đất"
           value={dataMoisture.soil_moisture}
-          unit="ppm"
+          unit=""
           type="moisture"
         />
-        <MetricCard title="Humidity" value={dataHumidity.humidity} unit="°C" type="humidity" />
+        <MetricCard
+          title="Độ ẩm không khí"
+          value={dataHumidity.humidity}
+          unit="%"
+          type="humidity"
+        />
       </div>
     </div>
   );

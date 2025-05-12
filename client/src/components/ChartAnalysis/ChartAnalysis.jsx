@@ -38,16 +38,16 @@ export default function ChartAnalysis() {
             {/* Main Dashboard */}
             <div className="dashboard-content">
               <div className="dashboard-header">
-                <h1 className="dashboard-title">Your Charts Analysis</h1>
+                {/* <h1 className="dashboard-title">Your Charts Analysis</h1> */}
                 <div className="dashboard-actions">
                   {/* <button className="btn btn-primary">
                     <Plus size={16} />
                     Add Widget
                   </button> */}
-                  <button className="btn btn-outline btn-icon">
+                  {/* <button className="btn btn-outline btn-icon">
                     <Eye size={18} />
                   </button>
-                  <button className="btn btn-outline">Filter</button>
+                  <button className="btn btn-outline">Filter</button> */}
                 </div>
               </div>
 

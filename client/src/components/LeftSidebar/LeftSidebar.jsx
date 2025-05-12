@@ -24,7 +24,7 @@ const LeftSidebar = () => {
       icon: Plus,
       name: "analytics",
       title: "Analytics",
-      url: "/home/plus",
+      url: "/home/AI",
     },
     {
       icon: Settings,

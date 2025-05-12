@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server/server.js"
+    "node": "nodemon server/server.js",
+    "dev": "concurrently \"npm run node\" \"npm run flask\"",
+    "flask": "py server/models/modelLoader/modelLoader.py"
   },
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.9.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -22,6 +25,7 @@
     "sequelize": "^6.37.5"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "nodemon": "^3.1.9"
   }
 }

@@ -1,0 +1,197 @@
+// AIComponent.scss
+$primary-color: #3182ce;
+$secondary-color: #2c5282;
+$success-color: #48bb78;
+$warning-color: #ed8936;
+$danger-color: #e53e3e;
+$light-color: #f7fafc;
+$dark-color: #1a202c;
+$grey-color: #e2e8f0;
+
+.ai-monitor-container {
+  width: 95vw;
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  .ai-monitor-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: $secondary-color;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: $primary-color;
+      margin: 0.75rem auto;
+      border-radius: 2px;
+    }
+  }
+  
+  .ai-monitor-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .sensor-tile {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sensor-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      
+      &.temperature { color: $danger-color; }
+      &.humidity { color: $primary-color; }
+      &.rainfall { color: $primary-color; }
+      &.brightness { color: $warning-color; }
+      &.soil { color: $success-color; }
+      
+      &.warning { 
+        animation: pulse 2s infinite;
+        color: $danger-color;
+      }
+    }
+    
+    .sensor-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: $dark-color;
+    }
+    
+    .sensor-value {
+      font-size: 2rem;
+      font-weight: 700;
+      
+      &.high { color: $danger-color; }
+      &.medium { color: $warning-color; }
+      &.normal { color: $success-color; }
+      &.low { color: $primary-color; }
+    }
+    
+    .sensor-unit {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-left: 0.25rem;
+    }
+  }
+  
+  .notification-panel {
+    grid-column: span 1;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    
+    @media (min-width: 768px) {
+      grid-column: span 3;
+    }
+    
+    .notification-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      
+      .notification-icon {
+        color: $primary-color;
+        margin-right: 0.5rem;
+      }
+      
+      .notification-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $dark-color;
+      }
+    }
+    
+    .notification-divider {
+      border-top: 1px solid $grey-color;
+      padding-top: 1rem;
+    }
+    
+    .notification-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      .notification-item {
+        padding: 0.75rem 0;
+        display: flex;
+        align-items: flex-start;
+        border-bottom: 1px solid $grey-color;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .notification-dot {
+          height: 0.5rem;
+          width: 0.5rem;
+          border-radius: 50%;
+          background-color: $primary-color;
+          margin-top: 0.5rem;
+          margin-right: 0.5rem;
+          flex-shrink: 0;
+          
+          &.warning {
+            background-color: $danger-color;
+            animation: pulse 2s infinite;
+          }
+        }
+        
+        .notification-message {
+          color: $dark-color;
+          
+          &.important {
+            font-weight: 600;
+            color: $danger-color;
+          }
+        }
+      }
+    }
+  }
+  
+  .ai-monitor-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    color: #718096;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

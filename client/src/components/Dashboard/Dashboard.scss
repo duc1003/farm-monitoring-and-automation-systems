@@ -7,11 +7,33 @@
 }
 
 .ai-assistant-card {
-  background-color: #111827;
-  color: white;
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &.good {
+    background-color: #2e7d32; // Xanh lá đậm
+    color: #e8f5e9; // Xanh nhạt dễ đọc
+    .card-description {
+      color: #fffde7;
+    }
+  }
+
+  &.medium {
+    background-color: #f9a825; // Vàng cam đậm
+    color: #fffde7; // Vàng nhạt
+    .card-description {
+      color: #fffde7;
+    }
+  }
+
+  &.bad {
+    background-color: #e53e3e; // Đỏ đậm
+    color: #ffebee; // Hồng nhạt
+    .card-description {
+      color: #ffebee; // Hồng nhạt
+    }
+  }
 }
 
 .card-title {
