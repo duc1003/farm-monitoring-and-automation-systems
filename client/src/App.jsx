@@ -26,7 +26,7 @@ const Layout = () => {
 
   return (
     <div className={`theme-${darkMode ? "dark" : "light"}`}>
-      <NavHeader />
+      {/* <NavHeader /> */}
       <div className="content">
         <LeftSidebar />
         <Outlet />
