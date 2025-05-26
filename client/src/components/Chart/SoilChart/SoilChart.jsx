@@ -12,11 +12,6 @@ const SoilChart = () => {
       .catch((err) => console.error('Error:', err));
   }, []);
 
-  const maxSoil = Math.max(...dataSoil.map((d) => d.soil_moisture || 0), 100);
-  const xSteps = 5;
-  const xLabels = Array.from({ length: xSteps + 1 }, (_, i) =>
-    Math.round((i * maxSoil) / xSteps)
-  );
 
   return (
     <div className="col-span-3">
@@ -36,11 +31,11 @@ const SoilChart = () => {
           <div className="chart-rows">
             {dataSoil.map((item, index) => (
               <div key={index} className="chart-row">
-                <span className="chart-label">{item.timestamps}</span>
+                <span className="chart-label">{item.date}</span>
                 <div
                   className="chart-bar"
                   style={{
-                    width: `${(item.soil_moisture / maxSoil) * 90}%`,
+                    width: `${(item.avg_soil / 1023) * 95}%`,
                     minWidth: '2%',
                   }}
                   data-value={item.soil_moisture}
@@ -49,10 +44,14 @@ const SoilChart = () => {
             ))}
           </div>
 
+          
           <div className="x-axis">
-            {xLabels.map((label, i) => (
-              <span key={i} className="x-label">{label}</span>
-            ))}
+            <div className="x-label">0</div>
+            <div className="x-label">200</div>
+            <div className="x-label">400</div>
+            <div className="x-label">600</div>
+            <div className="x-label">800</div>
+            <div className="x-label">1000</div>
           </div>
         </div>
       </div>

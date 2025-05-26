@@ -1,16 +1,15 @@
 import express from 'express';
-import { getHumidityData, getLatestRainStatus, getLatestHumidityData } from '../controllers/humidity.controllers.js';
-import { getTemperatureData, getLatestTemperature, getLatestSensorData } from '../controllers/temperature.controllers.js';
-import { getLightTimestampData, getLatestLightValue } from '../controllers/light.controllers.js';
-import { getSoilMoistureData, getLatestSoilMoisture } from '../controllers/soil.controllers.js';
+
+import { getHumidityData, getLatestHumidityData, getLatestLightValue, getLatestRainStatus, getLatestRainStatusByDay, getLatestSensorData, getLatestSensorDataHaveCheckNull, getLatestSoilMoisture, getLatestTemperature, getLightData, getSoilMoistureData, getTemperatureData } from '../controllers/sensor.controllers.js';
 
 const router = express.Router();
 
 router.get('/humidity', getHumidityData);
 router.get('/temperature', getTemperatureData);
-router.get('/light', getLightTimestampData);
+router.get('/light', getLightData);
 router.get('/soil', getSoilMoistureData);
 router.get('/rain', getLatestRainStatus);
+router.get('/rain_by_day', getLatestRainStatusByDay);
 router.get('/latestLight', getLatestLightValue);
 router.get('/latestHumidity', getLatestHumidityData);
 router.get('/latestSoilMoisture', getLatestSoilMoisture);

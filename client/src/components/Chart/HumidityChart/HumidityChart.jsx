@@ -1,21 +1,21 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import {BarChart3} from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import "./HumidityChart.scss";
 
 function HumidityChart() {
-    const [dataHumidity, setDataHumidity] = useState([]);
-    useEffect(() => {
-        axios
-          .get("http://localhost:8888/api/data/humidity")
-          .then((res) => {
-            setDataHumidity(res.data);
-          })
-          .catch((err) => {
-            console.error("Error fetching data:", err);
-          });
-      }, []);
-      console.log(dataHumidity);
+  const [dataHumidity, setDataHumidity] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/api/data/humidity")
+      .then((res) => {
+        setDataHumidity(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  }, []);
+  console.log("ádadsadsa", dataHumidity);
   return (
     <div className="col-span-6">
       <div className="widget widget-light">
@@ -52,14 +52,17 @@ function HumidityChart() {
             {dataHumidity.map((item, index) => (
               <div key={index} className="chart-column">
                 <div
-                  className={`chart-bar ${
-                    item.timestamps === "Wed" ? "active" : ""
-                  }`}
+                  className={`chart-bar ${item.date === "Wed" ? "active" : ""}`}
                   style={{
-                    height: `${(item.humidity / 100) * 140}px`,
+                    height: `${(item.avg_data / 100) * 140}px`,
                   }}
                 ></div>
-                <span className="chart-label">{item.timestamps}</span>
+                <span className="chart-label">
+                  {new Date(item.date).toLocaleDateString("vi-VN", {
+                    day: "2-digit",
+                    month: "2-digit",
+                  })}
+                </span>
               </div>
             ))}
           </div>

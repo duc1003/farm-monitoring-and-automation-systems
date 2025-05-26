@@ -21,6 +21,7 @@ const Dashboard = () => {
         console.error("Error fetching data:", err);
       });
   }, []);
+  console.log("data rain: ", dataRain);
   useEffect(() => {
     axios
       .get("http://localhost:8888/api/data/latestLight")
@@ -104,6 +105,8 @@ const Dashboard = () => {
     }
     return "Cây đang phát triển mạnh mẽ — hãy tiếp tục duy trì điều kiện chăm sóc hiện tại!";
   };
+  console.log("data growth: ", dataGrowth.prediction); 
+  
 
   return (
     <div className="dashboard-container">

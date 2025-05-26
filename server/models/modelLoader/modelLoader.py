@@ -20,6 +20,7 @@ def predict():
     data = request.get_json()
     try:
         input_data = [float(data[feature]) for feature in features]
+        print(f"Received input data: {input_data}")
     except Exception as e:
         return jsonify({"error": f"Lỗi dữ liệu đầu vào: {str(e)}"}), 400
 

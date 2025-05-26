@@ -46,10 +46,10 @@ export default function AIComponent() {
   };
   console.log("sensor: ", sensorData);
 
-  // Cập nhật dữ liệu mỗi 10 phút
+  // Cập nhật dữ liệu mỗi 30s
   useEffect(() => {
     updateSensorData();
-    const interval = setInterval(updateSensorData, 10 * 60 * 1000);
+    const interval = setInterval(updateSensorData, 30 * 1000);
     return () => clearInterval(interval);
   }, []);
 

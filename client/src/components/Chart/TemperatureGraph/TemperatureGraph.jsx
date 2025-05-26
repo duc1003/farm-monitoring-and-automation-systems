@@ -20,16 +20,7 @@ const TemperatureGraph = () => {
         const res = await axios.get(
           "http://localhost:8888/api/data/temperature"
         );
-        const formattedData = res.data.map((item) => ({
-          timestamp: new Date(item.timestamp).toLocaleTimeString("en-US", {
-            hour12: false,
-          }),
-
-          temperature: item.temperature,
-        }));
-        console.log("Formatted Data:", formattedData);
-
-        setDataTemperature(formattedData);
+        setDataTemperature(res.data);
       } catch (err) {
         console.error("Error fetching temperature data:", err);
       }
@@ -43,12 +34,12 @@ const TemperatureGraph = () => {
       <ResponsiveContainer>
         <LineChart data={dataTemperature}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="timestamp" />
+          <XAxis dataKey="date" />
           <YAxis label={{ value: "°C", position: "insideLeft" }} />
           <Tooltip />
           <Line
             type="monotone"
-            dataKey="temperature"
+            dataKey="avg_temp"
             stroke="#f97316"
             strokeWidth={2}
             dot={{ r: 0.5 }}

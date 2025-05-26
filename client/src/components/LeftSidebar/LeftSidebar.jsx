@@ -26,12 +26,12 @@ const LeftSidebar = () => {
       title: "Analytics",
       url: "/home/AI",
     },
-    {
-      icon: Settings,
-      name: "settings",
-      title: "Settings",
-      url: "/home/settings",
-    },
+    // {
+    //   icon: Settings,
+    //   name: "settings",
+    //   title: "Settings",
+    //   url: "/home/settings",
+    // },
   ];
 
   const bottomItems = [

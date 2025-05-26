@@ -16,6 +16,7 @@
     align-items: flex-end;
     padding: 10px;
     overflow-x: auto; /* Cho phép cuộn ngang nếu cần */
+    width: 100%; /* Chiếm toàn bộ chiều rộng của container */
   }
   // .humidity-value {
   //   position: absolute;
@@ -50,11 +51,11 @@
     flex-direction: column;
     align-items: center;
     width: 30px; /* Đặt chiều rộng tối đa cho mỗi cột */
-    margin: 0 5px; /* Khoảng cách giữa các cột */
+    margin: 0 auto; /* Khoảng cách giữa các cột */
   }
   
   .chart-bar {
-    width: 10px; /* Đảm bảo chiều rộng thanh đồ thị chiếm hết cột */
+    width: 20px; /* Đảm bảo chiều rộng thanh đồ thị chiếm hết cột */
     background-color: #f97316;
     transition: background-color 0.3s;
     max-height: 100%; /* Đảm bảo chiều cao thanh không vượt quá cột */

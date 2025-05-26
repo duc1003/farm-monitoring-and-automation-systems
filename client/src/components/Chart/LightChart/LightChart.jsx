@@ -12,8 +12,8 @@ const LightChart = () => {
       .then((res) => setDataLight(res.data))
       .catch((err) => console.error("Error:", err));
   }, []);
-  console.log(dataLight);
   
+  console.log("data light", dataLight);
 
   return (
     <div className="col-span-6">
@@ -26,28 +26,30 @@ const LightChart = () => {
         </div>
 
         <div className="light-chart">
-          <div className="chart-rows">
+          {/* Y-axis labels */}
+          <div className="y-axis">
+            <div className="y-label">40000</div>
+            <div className="y-label">30000</div>
+            <div className="y-label">20000</div>
+            <div className="y-label">10000</div>
+            <div className="y-label">0</div>
+          </div>
+
+          {/* Chart columns */}
+          <div className="chart-columns">
             {dataLight.map((item, index) => (
-              <div key={index} className="chart-row">
-                <span className="chart-label">{item.timestamps}</span>
+              <div key={index} className="chart-column">
                 <div
-                  className="chart-bar"
+                  className="chart-bar-vertical"
                   style={{
-                    width: `${(item.light / 1100) * 100}%`,
-                    minWidth: "2%",
+                    height: `${(item.avg_light / 40000) * 85}%`,
+                    minHeight: "2%",
                   }}
-                  data-value={item.light}
+                  data-value={item.avg_light}
                 ></div>
+                <span className="chart-label-bottom">{item.date}</span>
               </div>
             ))}
-          </div>
-          <div className="x-axis">
-            <div className="x-label">0</div>
-            <div className="x-label">200</div>
-            <div className="x-label">400</div>
-            <div className="x-label">600</div>
-            <div className="x-label">800</div>
-            <div className="x-label">1000</div>
           </div>
         </div>
       </div>
