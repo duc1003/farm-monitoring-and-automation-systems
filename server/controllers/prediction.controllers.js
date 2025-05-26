@@ -49,26 +49,18 @@
 // };
 import axios from 'axios';
 import SensorData from '../models/sensor_data/SensorData.model.js';
-import DailySummary from '../models/sensor_data/DailySummary.model.js';
 
 export const predictGrowth = async (req, res) => {
   try {
     // Lấy dữ liệu mới nhất từ DB
-    const latestData = await DailySummary.findOne({
-      attributes: ['avg_humidity', 'avg_light', 'avg_rain', 'avg_soil', 'avg_temp'],
-      order: [['date', 'DESC']],
+    const latestData = await SensorData.findOne({
+      attributes: ['humidity', 'light', 'rain', 'soil_moisture', 'temperature'],
+      order: [['timestamp', 'DESC']],
     });
 
     if (!latestData) {
       return res.status(404).json({ error: 'No sensor data found' });
     }
-    latestData.dataValues = {
-      humidity: latestData.dataValues.avg_humidity,
-      light: latestData.dataValues.avg_light,
-      rain: latestData.dataValues.avg_rain,
-      soil_moisture: latestData.dataValues.avg_soil,
-      temperature: latestData.dataValues.avg_temp,
-    };
     console.log('Latest data:', latestData.dataValues);
 
     // Gửi dữ liệu tới Flask server
