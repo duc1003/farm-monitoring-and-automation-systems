@@ -1,0 +1,83 @@
+.dashboard-container {
+  width: 95vw;
+  height: 100vh;;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #f8f9fa;
+}
+
+.ai-assistant-card {
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &.good {
+    background-color: #2e7d32; // Xanh lá đậm
+    color: #e8f5e9; // Xanh nhạt dễ đọc
+    .card-description {
+      color: #fffde7;
+    }
+  }
+
+  &.medium {
+    background-color: #f9a825; // Vàng cam đậm
+    color: #fffde7; // Vàng nhạt
+    .card-description {
+      color: #fffde7;
+    }
+  }
+
+  &.bad {
+    background-color: #e53e3e; // Đỏ đậm
+    color: #ffebee; // Hồng nhạt
+    .card-description {
+      color: #ffebee; // Hồng nhạt
+    }
+  }
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  color: #9ca3af;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.analyze-button {
+  background-color: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button-icon {
+  margin-left: 8px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 42px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 100vh) {
+    grid-template-columns: repeat(2 , 1fr);
+  }
+}

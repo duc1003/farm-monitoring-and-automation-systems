@@ -1,0 +1,76 @@
+/* Header */
+.header {
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-bar {
+  position: relative;
+  width: 320px;
+}
+
+.search-input {
+  padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+  background-color: var(--color-gray-100);
+  border-radius: var(--border-radius-full);
+  width: 100%;
+  border: none;
+  font-size: 0.875rem;
+}
+.search-input:focus {
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-gray-400);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.date-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--color-gray-100);
+  border-radius: var(--border-radius-full);
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+}
+
+.notification-badge {
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: bold;
+  border-radius: var(--border-radius-full);
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-secondary-light);
+  overflow: hidden;
+}/*# sourceMappingURL=NavHeader.css.map */

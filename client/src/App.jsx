@@ -6,21 +6,30 @@ import HomePage from "./pages/home/HomePage.jsx";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
 
-import "./style.scss";
+import "./App.scss";
+import NavHeader from "./components/NavHeader/NavHeader.jsx";
 import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
 import LeftSidebar from "./components/LeftSidebar/LeftSidebar.jsx";
+import ChartAnalysis from "./components/ChartAnalysis/ChartAnalysis.jsx";
+import AIComponent from "./components/AI/AIComponent.jsx";
+import { useNavigate } from "react-router-dom";
+import Dashboard from "./components/Dashboard/Dashboard.jsx";
 
 const Layout = () => {
   const { darkMode } = useContext(DarkModeContext);
+  const navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  if (!user) {
+    navigate("/login");
+  }
 
   return (
     <div className={`theme-${darkMode ? "dark" : "light"}`}>
-      <div style={{ display: "flex" }}>
+      {/* <NavHeader /> */}
+      <div className="content">
         <LeftSidebar />
-        <div >
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );
@@ -43,6 +52,9 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "/", element: <HomePage /> },
+      { path: "/home/dashboard", element: <AIComponent /> },
+      { path: "/home/chart", element: <ChartAnalysis /> },
+      { path: "/home/AI", element: <Dashboard /> },
     ],
   },
   { path: "/login", element: <Login /> },

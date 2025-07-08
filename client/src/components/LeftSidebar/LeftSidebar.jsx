@@ -1,86 +1,78 @@
-import { useState } from 'react';
-import styles from './LeftSidebar.module.scss';
-import { 
-  LayoutGrid, 
-  PlusSquare, 
-  Settings, 
-  BarChart2, 
-  FileText, 
-  HelpCircle 
-} from 'lucide-react';
+import { useState } from "react";
+import "./LeftSidebar.module.scss";
+import { Grid, BarChart3, Settings, Plus, RefreshCw } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LeftSidebar = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const navigate = useNavigate();
 
   const menuItems = [
-    { 
-      icon: LayoutGrid, 
-      name: 'dashboard',
-      title: 'Dashboard'
+    {
+      icon: Grid,
+      name: "dashboard",
+      title: "Dashboard",
+      url: "/home/dashboard",
     },
-    { 
-      icon: PlusSquare, 
-      name: 'add-widget',
-      title: 'Add Widget'
+    {
+      icon: BarChart3,
+      name: "add-widget",
+      title: "Add Widget",
+      url: "/home/chart",
     },
-    { 
-      icon: BarChart2, 
-      name: 'analytics',
-      title: 'Analytics'
+    {
+      icon: Plus,
+      name: "analytics",
+      title: "Analytics",
+      url: "/home/AI",
     },
-    { 
-      icon: FileText, 
-      name: 'documents',
-      title: 'Documents'
-    }
+    // {
+    //   icon: Settings,
+    //   name: "settings",
+    //   title: "Settings",
+    //   url: "/home/settings",
+    // },
   ];
 
   const bottomItems = [
-    { 
-      icon: HelpCircle, 
-      name: 'help',
-      title: 'Help'
+    {
+      icon: RefreshCw,
+      name: "help",
+      title: "Help",
     },
-    { 
-      icon: Settings, 
-      name: 'settings',
-      title: 'Settings'
-    }
   ];
 
   return (
-    <div className={styles.sidebar}>
-      <div className={styles.menuTop}>
-        {menuItems.map((item) => (
-          <div 
-            key={item.name}
-            className={`${styles.menuItem} ${activeTab === item.name ? styles.active : ''}`}
-            onClick={() => setActiveTab(item.name)}
-            title={item.title}
-          >
-            <item.icon 
-              className={`${styles.icon} ${activeTab === item.name ? styles.activeIcon : ''}`}
-              strokeWidth={activeTab === item.name ? 2 : 1.5}
-            />
-            {activeTab === item.name && <div className={styles.activeIndicator}></div>}
-          </div>
-        ))}
-      </div>
+    <div className="sidebar">
+      {menuItems.map((item) => (
+        <div
+          key={item.name}
+          className={`sidebar-icon ${
+            activeTab === item.name ? 'active' : ""
+          }`}
+          onClick={() => {
+            setActiveTab(item.name)
+            navigate(item.url);
+          }}
+          title={item.title}
+        >
+          <item.icon
+            className={`icon ${
+              activeTab === item.name ? 'activeIcon' : ""
+            }`}
+            strokeWidth={activeTab === item.name ? 2 : 1.5}
+          />
+          {activeTab === item.name && (
+            <div className='activeIndicator'></div>
+          )}
+        </div>
+      ))}
 
-      <div className={styles.menuBottom}>
-        {bottomItems.map((item) => (
-          <div 
-            key={item.name}
-            className={styles.menuItem}
-            title={item.title}
-          >
-            <item.icon 
-              className={styles.icon}
-              strokeWidth={1.5}
-            />
-          </div>
-        ))}
-      </div>
+      {bottomItems.map((item) => (
+        <div key={item.name} className='sidebar-icon sidebar-footer' title={item.title}>
+          <item.icon className='icon' strokeWidth={1.5} />
+        </div>
+      ))}
     </div>
   );
 };

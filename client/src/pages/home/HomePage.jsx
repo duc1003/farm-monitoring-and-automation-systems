@@ -1,10 +1,10 @@
-import SalesDashboard from "../../components/SalesDashboard/SalesDashboard.jsx"
-
+import AIComponent from "../../components/AI/AIComponent.jsx";
+// import Dashboard from "../../components/Dashboard/Dashboard.jsx";
+import "./homePage.scss";
 function HomePage() {
   return (
     <div>
-      <SalesDashboard/>
-      {/* <div>HomePage</div> */}
+      <AIComponent/>
     </div>
   )
 }

@@ -1,0 +1,114 @@
+.widget {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+
+  .widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .widget-title {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+
+    span {
+      margin-left: 8px;
+    }
+  }
+}
+
+.light-chart {
+  height: 300px;
+  display: flex;
+  position: relative;
+
+  .y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 210px;
+    width: 60px;
+    margin-right: 10px;
+    margin-top: 10px;
+
+    .y-label {
+      font-size: 12px;
+      color: #888;
+      text-align: right;
+      line-height: 1;
+    }
+  }
+
+  .chart-columns {
+    display: flex;
+    align-items: flex-end;
+    flex: 1;
+    height: 210px;
+    gap: 8px;
+    border-left: 2px solid #e5e7eb;
+    border-bottom: 2px solid #e5e7eb;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+
+    .chart-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      height: 100%;
+      justify-content: flex-end;
+
+      .chart-bar-vertical {
+        width: 30px;
+        background-color: #ffeb3b;
+        border-radius: 4px 4px 0 0;
+        transition: all 0.3s ease;
+        margin-bottom: 8px;
+        position: relative;
+
+        &:hover {
+          background-color: #ff9800;
+          transform: translateY(-2px);
+        }
+
+        &::after {
+          content: attr(data-value);
+          position: absolute;
+          top: -25px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #333;
+          color: white;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 11px;
+          white-space: nowrap;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+
+        &:hover::after {
+          opacity: 1;
+        }
+      }
+
+      .chart-label-bottom {
+        font-size: 12px;
+        color: #555;
+        text-align: center;
+        white-space: nowrap;
+        transform: rotate(-45deg);
+        transform-origin: center;
+        margin-top: 10px;
+      }
+    }
+  }
+}
